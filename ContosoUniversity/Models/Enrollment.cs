@@ -13,5 +13,6 @@
         public Grade? Grade { get; set; }
 
         public virtual Course Course { get; set; }
-        public
+        public virtual Student Student { get; set; }
     }
+}
