@@ -7,7 +7,9 @@ namespace ContosoUniversity.Models
     public class Student
     {
         public int ID { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string FirstMidName { get; set; }
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
