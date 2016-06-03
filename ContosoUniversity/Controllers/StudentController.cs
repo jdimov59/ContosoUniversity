@@ -14,13 +14,22 @@ namespace ContosoUniversity.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Student
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
+            //Adding Sorting Functionality to the Index Method - Part 1
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "";
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "fname_desc" : "";
             ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc" : "Date";
             var students = from s in db.Students
                            select s;
+
+            //Adding Filtering Functionality to the Index Method
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
+            }
+
+            //Adding Sorting Functionality to the Index Method - Part 2
             switch (sortOrder)
             {
                 case "lname_desc":
