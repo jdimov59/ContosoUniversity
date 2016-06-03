@@ -6,6 +6,7 @@ using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using System.Data;
 using System;
+using PagedList;
 
 namespace ContosoUniversity.Controllers
 {
@@ -14,12 +15,26 @@ namespace ContosoUniversity.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            //Adding Paging Functionality to the Index Method - Part 1
+            ViewBag.CurrentSort = sortOrder;
             //Adding Sorting Functionality to the Index Method - Part 1
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "";
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "fname_desc" : "";
             ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var students = from s in db.Students
                            select s;
 
@@ -48,7 +63,11 @@ namespace ContosoUniversity.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            return View(students.ToList());
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(students.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Student/Details/5

@@ -1,19 +1,21 @@
-﻿@model IEnumerable<ContosoUniversity.Models.Student>
+﻿@model PagedList.IPagedList<ContosoUniversity.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
-<h2>Index</h2>
+<h2>ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
@@ -30,11 +32,11 @@
             @Html.ActionLink("FirstMidName", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.FirstMidName)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </th>
+        @Html.DisplayNameFor(model => model.FirstMidName)
+    </th>*@
+    <th>
+        @Html.DisplayNameFor(model => model.First().EmailAddress)
+    </th>
         @*<th>
             @Html.DisplayNameFor(model => model.EnrollmentDate)
         </th>*@
@@ -65,3 +67,7 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
