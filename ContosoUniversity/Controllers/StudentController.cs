@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using System.Data;
+using System;
 
 namespace ContosoUniversity.Controllers
 {
@@ -13,9 +14,32 @@ namespace ContosoUniversity.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Students.ToList());
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "";
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "fname_desc" : "";
+            ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc" : "Date";
+            var students = from s in db.Students
+                           select s;
+            switch (sortOrder)
+            {
+                case "lname_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "fname_desc":
+                    students = students.OrderByDescending(s => s.FirstMidName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(students.ToList());
         }
 
         // GET: Student/Details/5

@@ -11,18 +11,25 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.LastName)
+        </th>*@
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.ActionLink("FirstMidName", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.EmailAddress)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.EnrollmentDate)
-        </th>
+        </th>*@
+        <th>@Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParam })</th>
         <th></th>
     </tr>
 
