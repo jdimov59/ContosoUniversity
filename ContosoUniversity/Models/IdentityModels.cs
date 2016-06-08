@@ -21,7 +21,7 @@ namespace ContosoUniversity.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ContosoUniversity2", throwIfV1Schema: false)
+            : base("ContosoUniversity3", throwIfV1Schema: false)
         {
         }
 

@@ -244,6 +244,14 @@
     <Compile Include="Migrations\201606071318101_RowVersion.Designer.cs">
       <DependentUpon>201606071318101_RowVersion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606080750152_DepartmentSP1.cs" />
+    <Compile Include="Migrations\201606080750152_DepartmentSP1.Designer.cs">
+      <DependentUpon>201606080750152_DepartmentSP1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606080757221_RowVersion1.cs" />
+    <Compile Include="Migrations\201606080757221_RowVersion1.Designer.cs">
+      <DependentUpon>201606080757221_RowVersion1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -383,6 +391,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606071318101_RowVersion.resx">
       <DependentUpon>201606071318101_RowVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606080750152_DepartmentSP1.resx">
+      <DependentUpon>201606080750152_DepartmentSP1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606080757221_RowVersion1.resx">
+      <DependentUpon>201606080757221_RowVersion1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

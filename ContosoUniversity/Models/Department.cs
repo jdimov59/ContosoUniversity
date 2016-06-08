@@ -7,7 +7,7 @@ namespace ContosoUniversity.Models
 {
     public class Department
     {
-        public int DepartmentID { get; internal set; }
+        public int DepartmentID { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
